@@ -20,12 +20,15 @@ public class MazeSpawner : MonoBehaviour
     public GameObject Floor = null;
     public GameObject Wall = null;
     public GameObject Pillar = null;
+    public GameObject FakeWall = null;
     public int Rows = 5;
     public int Columns = 5;
     public float CellWidth = 5;
     public float CellHeight = 5;
     public bool AddGaps = true;
     public GameObject GoalPrefab = null;
+
+    public float fakeWallChance = 0;
 
     private BasicMazeGenerator mMazeGenerator = null;
 
@@ -36,18 +39,27 @@ public class MazeSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             GenerateNewMaze();
         }
     }
 
+    // Calculte boolean based on percentage to check if a fake wall should be placed
+    private bool HasFakeWall()
+    {
+        int randomNumber = Random.Range(1, 100);
+        return randomNumber <= fakeWallChance;
+    }
+
+    // Genrates a new maze and destroys the old one
     public void GenerateNewMaze()
     {
         RemoveMaze();
         GenerateMaze();
     }
 
+    // Destroys the maze
     private void RemoveMaze()
     {
         for (int iChild = 0; iChild < transform.childCount; iChild++)
@@ -56,11 +68,12 @@ public class MazeSpawner : MonoBehaviour
         }
     }
 
+    // Generates a maze
     private void GenerateMaze()
     {
         if (!FullRandom)
         {
-            Random.seed = RandomSeed;
+            Random.InitState(RandomSeed);
         }
         switch (Algorithm)
         {
@@ -96,9 +109,21 @@ public class MazeSpawner : MonoBehaviour
                     tmp = Instantiate(Wall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
                     tmp.transform.parent = transform;
                 }
+                // Fake wall Right randomize
+                else if(HasFakeWall())
+                {
+                    tmp = Instantiate(FakeWall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
+                    tmp.transform.parent = transform;
+                }
                 if (cell.WallFront)
                 {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
+                    tmp.transform.parent = transform;
+                }
+                // Fake wall front randomize
+                else if (HasFakeWall())
+                {
+                    tmp = Instantiate(FakeWall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
                     tmp.transform.parent = transform;
                 }
                 if (cell.WallLeft)
@@ -106,9 +131,21 @@ public class MazeSpawner : MonoBehaviour
                     tmp = Instantiate(Wall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
                     tmp.transform.parent = transform;
                 }
+                // Fake wall Left randomize
+                else if (HasFakeWall())
+                {
+                    tmp = Instantiate(FakeWall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
+                    tmp.transform.parent = transform;
+                }
                 if (cell.WallBack)
                 {
                     tmp = Instantiate(Wall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
+                    tmp.transform.parent = transform;
+                }
+                // Fake wall back randomize
+                else if (HasFakeWall())
+                {
+                    tmp = Instantiate(FakeWall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
                     tmp.transform.parent = transform;
                 }
                 if (cell.IsGoal && GoalPrefab != null)
