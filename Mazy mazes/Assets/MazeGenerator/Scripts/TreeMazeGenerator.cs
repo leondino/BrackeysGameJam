@@ -7,6 +7,8 @@ using System.Collections;
 //</summary>
 public abstract class TreeMazeGenerator : BasicMazeGenerator {
 
+	private bool isFirstGoal = true;
+
 	//<summary>
 	//Class representation of target cell
 	//</summary>
@@ -84,9 +86,13 @@ public abstract class TreeMazeGenerator : BasicMazeGenerator {
 				}
 			}
 
-			if(!GetMazeCell(ctv.Row,ctv.Column).IsVisited && movesAvailableCount == 0){
-				GetMazeCell(ctv.Row,ctv.Column).IsGoal = true;
-			}
+			//Goals can spawn to close to player, so for the main goal this is disabled
+
+			//if(!GetMazeCell(ctv.Row,ctv.Column).IsVisited && movesAvailableCount == 0
+			//	&& isFirstGoal){
+			//	GetMazeCell(ctv.Row,ctv.Column).IsGoal = true;
+			//	isFirstGoal = false;
+			//}
 
 			GetMazeCell(ctv.Row,ctv.Column).IsVisited = true;
 			

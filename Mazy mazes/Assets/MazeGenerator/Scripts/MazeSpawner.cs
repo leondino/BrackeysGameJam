@@ -32,19 +32,6 @@ public class MazeSpawner : MonoBehaviour
 
     private BasicMazeGenerator mMazeGenerator = null;
 
-    void Start()
-    {
-        GenerateMaze();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GenerateNewMaze();
-        }
-    }
-
     // Calculte boolean based on percentage to check if a fake wall should be placed
     private bool HasFakeWall()
     {
@@ -148,13 +135,25 @@ public class MazeSpawner : MonoBehaviour
                     tmp = Instantiate(FakeWall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
                     tmp.transform.parent = transform;
                 }
+
+                // Goals
+                // End of path goals (Disabled atm)
                 if (cell.IsGoal && GoalPrefab != null)
                 {
                     tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;
                 }
+                // Furthest cell goal
+                if ((row == Rows - 1 && column == Columns - 1) && GoalPrefab != null)
+                {
+                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp.transform.parent = transform;
+                }
+
             }
         }
+
+        // Pillars
         if (Pillar != null)
         {
             for (int row = 0; row < Rows + 1; row++)
