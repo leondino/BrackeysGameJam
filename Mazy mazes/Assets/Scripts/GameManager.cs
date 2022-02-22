@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance = null;
+
     public MazeSpawner mazeSpawner;
 
     [SerializeField]
@@ -14,7 +16,16 @@ public class GameManager : MonoBehaviour
     private int startFakeWallChance = 5;
     private int fakeWallChance;
 
-    private int level = 1;
+    public int level = 1;
+
+    // Make instance (Singleton) in Awake
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
 
     // Initialize varibles in start and generate first maze
     void Start()
@@ -29,14 +40,11 @@ public class GameManager : MonoBehaviour
         mazeSpawner.GenerateNewMaze();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void NextLevel()
     {
-        
-    }
-
-    private void NextLevel()
-    {
-
+        // Increment mazeSize
+        // Increment fakeWallChance
+        level++;
+        mazeSpawner.GenerateNewMaze();
     }
 }

@@ -35,4 +35,20 @@ public class PlayerControler : MonoBehaviour
         velocity.x = Input.GetAxis("Horizontal") * maxSpeed;
         velocity.z = Input.GetAxis("Vertical") * maxSpeed;
     }
+
+    private void ReachedFinish()
+    {
+        transform.position = new Vector3(0, 1, 0);
+        GameManager.instance.NextLevel();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Test1");
+        if (other.CompareTag("EndPortal"))
+        {
+            Debug.Log("Test2");
+            ReachedFinish();
+        }
+    }
 }
