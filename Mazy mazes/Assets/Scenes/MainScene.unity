@@ -339,6 +339,17 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!114 &612831975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8205242290378202377, guid: fbb373d0142566f429609182383ec907, type: 3}
+  m_PrefabInstance: {fileID: 8205242290804067221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae348350d5523d841870f9d9efb1740f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!115 &796481730
 MonoScript:
   m_ObjectHideFlags: 0
@@ -5283,6 +5294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mazeSpawner: {fileID: 949568340}
+  player: {fileID: 612831975}
   startMazeSize: 10
   startFakeWallChance: 5
   startTimeLimit: 30

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     public MazeSpawner mazeSpawner;
+    public PlayerControler player;
 
     [SerializeField]
     private int startMazeSize = 10;
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     public int timerToDisplay;
     private bool playTimer;
 
-    public int level = 1;
+    public int level;
 
     // Make instance (Singleton) in Awake
     private void Awake()
@@ -38,17 +39,7 @@ public class GameManager : MonoBehaviour
     // Initialize varibles in start and generate first maze
     void Start()
     {
-        mazeSize = startMazeSize;
-        mazeSpawner.Rows = mazeSize;
-        mazeSpawner.Columns = mazeSize;
-
-        fakeWallChance = startFakeWallChance;
-        mazeSpawner.fakeWallChance = fakeWallChance;
-
-        timeLimit = startTimeLimit;
-        LevelStart();
-
-        mazeSpawner.GenerateNewMaze();
+        Restart();
     }
 
     private void FixedUpdate()
@@ -85,5 +76,25 @@ public class GameManager : MonoBehaviour
     {
         playTimer = false;
         Debug.Log("Game Over");
+        Restart();
+    }
+
+    private void Restart()
+    {
+        player.transform.position = new Vector3(0, 1, 0);
+
+        level = 1;
+
+        mazeSize = startMazeSize;
+        mazeSpawner.Rows = mazeSize;
+        mazeSpawner.Columns = mazeSize;
+
+        fakeWallChance = startFakeWallChance;
+        mazeSpawner.fakeWallChance = fakeWallChance;
+
+        timeLimit = startTimeLimit;
+        LevelStart();
+
+        mazeSpawner.GenerateNewMaze();
     }
 }
