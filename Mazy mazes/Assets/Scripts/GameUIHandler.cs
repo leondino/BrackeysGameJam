@@ -7,17 +7,12 @@ using TMPro;
 public class GameUIHandler : MonoBehaviour
 {
     [SerializeField]
-    private TMP_Text levelTimer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private TMP_Text levelTimer, levelNumber;
 
     // Update is called once per frame
     void FixedUpdate()
     {
         levelTimer.text = GameManager.instance.timerToDisplay.ToString();
+        levelNumber.text = "Level " + GameManager.instance.level.ToString();
     }
 }
