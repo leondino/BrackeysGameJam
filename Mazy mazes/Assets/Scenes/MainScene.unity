@@ -208,8 +208,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 150
+  m_fontSizeBase: 150
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5430,8 +5430,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mazeSpawner: {fileID: 949568340}
   player: {fileID: 612831975}
-  startMazeSize: 15
-  startFakeWallChance: 1
+  startMazeSize: 5
+  startFakeWallChance: 0
   startTimeLimit: 30
   timerToDisplay: 0
   level: 1

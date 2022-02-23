@@ -57,10 +57,23 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        // Increment mazeSize
-        // Increment fakeWallChance
-        // -Increment timeLimit
         level++;
+        Debug.Log(level % 2);
+        // Increment fakeWallChance every even number level
+        if (level % 2 == 0 && fakeWallChance < 100)
+            fakeWallChance += 2;
+        // Increment mazeSize every odd number level
+        else
+            mazeSize += 1;
+        // Increment timeLimit every 5 levels
+        if (level % 5 == 0)
+            timeLimit += 10;
+
+        // Update mazespawner with new values
+        mazeSpawner.Rows = mazeSize;
+        mazeSpawner.Columns = mazeSize;
+        mazeSpawner.fakeWallChance = fakeWallChance;
+
         mazeSpawner.GenerateNewMaze();
         LevelStart();
     }
