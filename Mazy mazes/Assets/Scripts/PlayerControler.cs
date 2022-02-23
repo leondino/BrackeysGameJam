@@ -44,10 +44,8 @@ public class PlayerControler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Test1");
         if (other.CompareTag("EndPortal"))
         {
-            Debug.Log("Test2");
             ReachedFinish();
         }
     }
