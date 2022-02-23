@@ -86,13 +86,13 @@ public abstract class TreeMazeGenerator : BasicMazeGenerator {
 				}
 			}
 
-			//Goals can spawn to close to player, so for the main goal this is disabled
+			//Put a goal to end of first path found, this is a vision token
 
-			//if(!GetMazeCell(ctv.Row,ctv.Column).IsVisited && movesAvailableCount == 0
-			//	&& isFirstGoal){
-			//	GetMazeCell(ctv.Row,ctv.Column).IsGoal = true;
-			//	isFirstGoal = false;
-			//}
+			if(!GetMazeCell(ctv.Row,ctv.Column).IsVisited && movesAvailableCount == 0
+				&& isFirstGoal){
+				GetMazeCell(ctv.Row,ctv.Column).IsGoal = true;
+				isFirstGoal = false;
+			}
 
 			GetMazeCell(ctv.Row,ctv.Column).IsVisited = true;
 			

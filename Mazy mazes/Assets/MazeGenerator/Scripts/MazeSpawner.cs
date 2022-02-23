@@ -26,7 +26,7 @@ public class MazeSpawner : MonoBehaviour
     public float CellWidth = 5;
     public float CellHeight = 5;
     public bool AddGaps = true;
-    public GameObject GoalPrefab = null;
+    public GameObject VisionTokenPrefab = null;
     public GameObject EndGoalPrefab = null;
 
     public float fakeWallChance = 0;
@@ -139,13 +139,13 @@ public class MazeSpawner : MonoBehaviour
 
                 // Goals
                 // End of path goals (Disabled atm)
-                if (cell.IsGoal && GoalPrefab != null)
+                if (cell.IsGoal && VisionTokenPrefab != null)
                 {
-                    tmp = Instantiate(GoalPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
+                    tmp = Instantiate(VisionTokenPrefab, new Vector3(x, 1, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;
                 }
                 // Furthest cell goal
-                if ((row == Rows - 1 && column == Columns - 1) && GoalPrefab != null)
+                if ((row == Rows - 1 && column == Columns - 1) && VisionTokenPrefab != null)
                 {
                     tmp = Instantiate(EndGoalPrefab, new Vector3(x, 0.1f, z), Quaternion.Euler(0, 0, 0)) as GameObject;
                     tmp.transform.parent = transform;

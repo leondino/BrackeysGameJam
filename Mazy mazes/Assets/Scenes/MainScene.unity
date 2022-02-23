@@ -420,7 +420,7 @@ MonoBehaviour:
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
-  GoalPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
+  VisionTokenPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
   EndGoalPrefab: {fileID: 7480470050223606739, guid: f6483a5d79be28f4390c5f322de1ac39, type: 3}
   fakeWallChance: 10
 --- !u!115 &999177115
