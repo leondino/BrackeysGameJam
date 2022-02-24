@@ -27,15 +27,34 @@ public class GameUIHandler : MonoBehaviour
 
     public void UpdateVisionButton(int stage)
     {
-        visionButton.image.sprite = visionButtonSprites[stage];
+        if (stage < 4)
+        {
+            visionButton.image.sprite = visionButtonSprites[stage];
+            visionButton.GetComponentInChildren<TMP_Text>().enabled = false;
+        }
+        else
+        {
+            visionButton.GetComponentInChildren<TMP_Text>().enabled = true;
+        }
         if (stage == 3)
+        {
             visionButton.interactable = true;
-        else 
+        }
+        else
+        {
             visionButton.interactable = false;
+        }
     }
 
     private void UpdateTimerDisplay()
     {
         levelTimer.text = GameManager.instance.timerToDisplay.ToString();
+
+        if (visionButton.GetComponentInChildren<TMP_Text>().enabled)
+        {
+            visionButton.GetComponentInChildren<TMP_Text>().text =
+                GameManager.instance.player.GetComponent<VisionAbility>().
+                timerToDisplay.ToString(); ;
+        }
     }
 }

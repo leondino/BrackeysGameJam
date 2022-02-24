@@ -9,16 +9,30 @@ public class VisionAbility : MonoBehaviour
     [SerializeField]
     private Material normalWallMat, fakeWallMat;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private int visionDuration;
+    private float timer;
+    public int timerToDisplay;
+    private bool playTimer;
+
+    private void Update()
     {
-        
+        // Test cheat code
+        if (Input.GetKeyDown(KeyCode.PageUp) && visionTokens < 3)
+            PickUpToken();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        if (playTimer)
+        {
+            timer -= Time.deltaTime;
+            timerToDisplay = (int)timer;
+            if (timerToDisplay <= 0)
+            {
+                ResetVisionAbility();
+            }
+        }
     }
 
     public void ActivateVisionAbility()
@@ -29,11 +43,29 @@ public class VisionAbility : MonoBehaviour
             fakeWall.transform.GetChild(0).gameObject.
                 GetComponent<MeshRenderer>().material = fakeWallMat;
         }
+
+        GameManager.instance.gameUI.UpdateVisionButton(visionTokens + 1);
+        timer = visionDuration + 1;
+        playTimer = true;
     }
 
     public void ResetVisionAbility()
     {
+        playTimer = false;
         visionTokens = 0;
+        GameManager.instance.gameUI.UpdateVisionButton(visionTokens);
+
+        foreach (GameObject fakeWall in GameManager.instance.mazeSpawner.allFakeWalls)
+        {
+            fakeWall.GetComponent<MeshRenderer>().material = normalWallMat;
+            fakeWall.transform.GetChild(0).gameObject.
+                GetComponent<MeshRenderer>().material = normalWallMat;
+        }
+    }
+
+    private void PickUpToken()
+    {
+        visionTokens++;
         GameManager.instance.gameUI.UpdateVisionButton(visionTokens);
     }
 
@@ -41,9 +73,8 @@ public class VisionAbility : MonoBehaviour
     {
         if (other.CompareTag("Token") && visionTokens < 3)
         {
-            visionTokens++;
             Destroy(other.gameObject);
-            GameManager.instance.gameUI.UpdateVisionButton(visionTokens);
+            PickUpToken();
         }
     }
 }

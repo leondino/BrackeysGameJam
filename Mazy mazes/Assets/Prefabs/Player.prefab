@@ -138,7 +138,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.25882354, g: 0.23921569, b: 0.14117648, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -316,6 +316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalWallMat: {fileID: 2100000, guid: 47c87a00e35b22140b638d8939ea89bf, type: 2}
   fakeWallMat: {fileID: 2100000, guid: 0e2a63f7a6af6034692a41bf548e0eca, type: 2}
+  visionDuration: 5
+  timerToDisplay: 0
 --- !u!54 &8205242290378202420
 Rigidbody:
   m_ObjectHideFlags: 0
