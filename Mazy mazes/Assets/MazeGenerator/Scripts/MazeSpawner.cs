@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 //<summary>
 //Game object, that creates maze and instantiates it in scene
@@ -30,6 +32,8 @@ public class MazeSpawner : MonoBehaviour
     public GameObject EndGoalPrefab = null;
 
     public float fakeWallChance = 0;
+    [HideInInspector]
+    public List<GameObject> allFakeWalls = new List<GameObject>();
 
     private BasicMazeGenerator mMazeGenerator = null;
 
@@ -54,6 +58,7 @@ public class MazeSpawner : MonoBehaviour
         {
             Destroy(transform.GetChild(iChild).gameObject);
         }
+        allFakeWalls.Clear();
     }
 
     // Generates a maze
@@ -102,6 +107,7 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(FakeWall, new Vector3(x + CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 90, 0)) as GameObject;// right
                     tmp.transform.parent = transform;
+                    allFakeWalls.Add(tmp);
                 }
                 if (cell.WallFront)
                 {
@@ -113,6 +119,7 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(FakeWall, new Vector3(x, 0, z + CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 0, 0)) as GameObject;// front
                     tmp.transform.parent = transform;
+                    allFakeWalls.Add(tmp);
                 }
                 if (cell.WallLeft)
                 {
@@ -124,6 +131,7 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(FakeWall, new Vector3(x - CellWidth / 2, 0, z) + Wall.transform.position, Quaternion.Euler(0, 270, 0)) as GameObject;// left
                     tmp.transform.parent = transform;
+                    allFakeWalls.Add(tmp);
                 }
                 if (cell.WallBack)
                 {
@@ -135,6 +143,7 @@ public class MazeSpawner : MonoBehaviour
                 {
                     tmp = Instantiate(FakeWall, new Vector3(x, 0, z - CellHeight / 2) + Wall.transform.position, Quaternion.Euler(0, 180, 0)) as GameObject;// back
                     tmp.transform.parent = transform;
+                    allFakeWalls.Add(tmp);
                 }
 
                 // Goals

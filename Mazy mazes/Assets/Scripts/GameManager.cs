@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     public MazeSpawner mazeSpawner;
     public PlayerControler player;
+    public GameUIHandler gameUI;
 
     [SerializeField]
     private int startMazeSize = 10;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
 
     private void LevelStart()
     {
+        gameUI.UpdateLevelDisplay();
         timer = timeLimit + 1;
         timerToDisplay = timeLimit;
         playTimer = true;
@@ -95,6 +97,7 @@ public class GameManager : MonoBehaviour
     private void Restart()
     {
         player.transform.position = new Vector3(0, 1, 0);
+        player.GetComponent<VisionAbility>().ResetVisionAbility();
 
         level = 1;
 

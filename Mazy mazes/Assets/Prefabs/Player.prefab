@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 8205242290378202379}
   - component: {fileID: 8205242290378202376}
   - component: {fileID: 8205242290378202377}
+  - component: {fileID: 8390322949678965272}
   - component: {fileID: 8205242290378202420}
   m_Layer: 0
   m_Name: Player
@@ -301,6 +302,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 0.1
+--- !u!114 &8390322949678965272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8205242290378202382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26c8086fa2949624a916d3cc5142a6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalWallMat: {fileID: 2100000, guid: 47c87a00e35b22140b638d8939ea89bf, type: 2}
+  fakeWallMat: {fileID: 2100000, guid: 0e2a63f7a6af6034692a41bf548e0eca, type: 2}
 --- !u!54 &8205242290378202420
 Rigidbody:
   m_ObjectHideFlags: 0
