@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public MazeSpawner mazeSpawner;
     public PlayerControler player;
     public GameUIHandler gameUI;
+    public GameObject pauseMenu, gameOverMenu;
 
     [SerializeField]
     private int startMazeSize = 10;
@@ -56,6 +58,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+    }
+
     public void NextLevel()
     {
         level++;
@@ -87,15 +97,37 @@ public class GameManager : MonoBehaviour
         playTimer = true;
     }
 
+    private void PauseGame()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
+
     private void GameOver()
     {
+        Time.timeScale = 0;
         playTimer = false;
+        gameOverMenu.SetActive(true);
         Debug.Log("Game Over");
         Restart();
     }
 
-    private void Restart()
+    public void Restart()
     {
+        gameOverMenu.SetActive(false);
+        ResumeGame();
+
         player.transform.position = new Vector3(0, 1, 0);
         player.GetComponent<VisionAbility>().ResetVisionAbility();
 
