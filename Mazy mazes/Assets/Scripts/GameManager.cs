@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         level++;
-        Debug.Log(level % 2);
         // Increment fakeWallChance every even number level
         if (level % 2 == 0 && fakeWallChance < 100)
             fakeWallChance += 2;
@@ -119,8 +118,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         playTimer = false;
         gameOverMenu.SetActive(true);
-        Debug.Log("Game Over");
-        Restart();
+        gameOverMenu.GetComponent<GameOverHandler>().UpdateScores();
     }
 
     public void Restart()
