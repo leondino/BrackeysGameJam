@@ -15,10 +15,11 @@ public class GameUIHandler : MonoBehaviour
     private Sprite[] visionButtonSprites;
 
     private int myDisplayTimer;
+    private float defaultFontSize;
 
     private void Awake()
     {
-        float defaultFontSize = levelTimer.fontSize;
+        defaultFontSize = levelTimer.fontSize;
     }
 
     // Update is called once per frame
