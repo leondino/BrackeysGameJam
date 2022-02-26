@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
             timerToDisplay = (int)timer;
             if (timerToDisplay <= 0)
             {
+                gameUI.UpdateTimerDisplay();
                 GameOver();
             }
             if (timerToDisplay == 5 &! lastSecondsActive)
@@ -100,6 +101,8 @@ public class GameManager : MonoBehaviour
         gameUI.UpdateLevelDisplay();
         timer = timeLimit + 1;
         timerToDisplay = timeLimit;
+        lastSecondsActive = false;
+        audioManager.SwitchBackgroundPitch(false);
         playTimer = true;
     }
 
@@ -142,10 +145,6 @@ public class GameManager : MonoBehaviour
 
         level = 1;
 
-        lastSecondsActive = false;
-        audioManager.SwitchBackgroundPitch(false);
-        audioManager.SwitchBackgroundVolume(false);
-
         mazeSize = startMazeSize;
         mazeSpawner.Rows = mazeSize;
         mazeSpawner.Columns = mazeSize;
@@ -155,6 +154,8 @@ public class GameManager : MonoBehaviour
 
         timeLimit = startTimeLimit;
         LevelStart();
+
+        audioManager.SwitchBackgroundVolume(false);
 
         mazeSpawner.GenerateNewMaze();
     }

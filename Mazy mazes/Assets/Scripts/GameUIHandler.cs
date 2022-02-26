@@ -54,7 +54,7 @@ public class GameUIHandler : MonoBehaviour
         }
     }
 
-    private void UpdateTimerDisplay()
+    public void UpdateTimerDisplay()
     {
         // Update normal timer plus enlarge effect
         if (myDisplayTimer != GameManager.instance.timerToDisplay)
