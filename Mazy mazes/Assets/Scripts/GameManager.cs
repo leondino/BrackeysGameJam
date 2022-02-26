@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private float timer;
     public int timerToDisplay;
     private bool playTimer;
+    private bool lastSecondsActive;
 
     public int level;
 
@@ -55,6 +56,11 @@ public class GameManager : MonoBehaviour
             if (timerToDisplay <= 0)
             {
                 GameOver();
+            }
+            if (timerToDisplay == 5 &! lastSecondsActive)
+            {
+                lastSecondsActive = true;
+                audioManager.SwitchBackgroundPitch(true);
             }
         }
     }
@@ -99,12 +105,14 @@ public class GameManager : MonoBehaviour
 
     private void PauseGame()
     {
+        audioManager.SwitchBackgroundVolume(true);
         pauseMenu.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
+        audioManager.SwitchBackgroundVolume(false);
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
     }
@@ -116,6 +124,8 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        audioManager.SwitchBackgroundVolume(true);
+
         Time.timeScale = 0;
         playTimer = false;
         gameOverMenu.SetActive(true);
@@ -131,6 +141,10 @@ public class GameManager : MonoBehaviour
         player.GetComponent<VisionAbility>().ResetVisionAbility();
 
         level = 1;
+
+        lastSecondsActive = false;
+        audioManager.SwitchBackgroundPitch(false);
+        audioManager.SwitchBackgroundVolume(false);
 
         mazeSize = startMazeSize;
         mazeSpawner.Rows = mazeSize;

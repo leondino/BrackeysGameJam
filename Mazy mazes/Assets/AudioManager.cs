@@ -31,4 +31,27 @@ public class AudioManager : MonoBehaviour
     {
         activateVisionAbility.Play();
     }
+
+    public void SwitchBackgroundPitch(bool lastSeconds)
+    {
+        if (lastSeconds)
+        {
+            gameBackgroundLoop.pitch = 1.25f;
+        }
+        else
+        {
+            gameBackgroundLoop.pitch = 1;
+        }
+    }
+
+    public void SwitchBackgroundVolume(bool gameOver)
+    {
+        if (gameOver)
+        {
+            SwitchBackgroundPitch(false);
+            gameBackgroundLoop.volume = 0.2f;
+        }
+        else
+            gameBackgroundLoop.volume = 0.5f;
+    }
 }
