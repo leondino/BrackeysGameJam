@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource clickSound, gameBackground, tokenPickup, activateVisionAbility;
+    public AudioSource clickSound, gameBackgroundStart, gameBackgroundLoop, tokenPickup, activateVisionAbility;
+
+    private void FixedUpdate()
+    {
+        if (gameBackgroundStart.enabled)
+        {
+            if (!gameBackgroundStart.isPlaying && !gameBackgroundLoop.isPlaying)
+            {
+                gameBackgroundLoop.Play();
+            }
+        }
+    }
 
     public void PlayClickSound()
     {

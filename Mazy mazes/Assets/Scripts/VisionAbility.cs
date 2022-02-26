@@ -47,6 +47,8 @@ public class VisionAbility : MonoBehaviour
         GameManager.instance.gameUI.UpdateVisionButton(visionTokens + 1);
         timer = visionDuration + 1;
         playTimer = true;
+
+        GameManager.instance.audioManager.PlayActivateVision();
     }
 
     public void ResetVisionAbility()
@@ -67,6 +69,8 @@ public class VisionAbility : MonoBehaviour
     {
         visionTokens++;
         GameManager.instance.gameUI.UpdateVisionButton(visionTokens);
+
+        GameManager.instance.audioManager.PlayTokenPickup();
     }
 
     private void OnTriggerEnter(Collider other)

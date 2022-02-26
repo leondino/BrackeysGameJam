@@ -16,6 +16,11 @@ public class GameUIHandler : MonoBehaviour
 
     private int myDisplayTimer;
 
+    private void Awake()
+    {
+        float defaultFontSize = levelTimer.fontSize;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -69,7 +74,6 @@ public class GameUIHandler : MonoBehaviour
 
     private IEnumerator EnlargeTimer()
     {
-        float defaultFontSize = levelTimer.fontSize;
         levelTimer.fontSize = defaultFontSize * 1.15f;
 
         yield return new WaitForSeconds(0.25f);

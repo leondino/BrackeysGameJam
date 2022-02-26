@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public MazeSpawner mazeSpawner;
     public PlayerControler player;
     public GameUIHandler gameUI;
+    public AudioManager audioManager;
     public GameObject pauseMenu, gameOverMenu;
 
     [SerializeField]
