@@ -12,7 +12,9 @@ public class GameUIHandler : MonoBehaviour
     private Button visionButton;
 
     [SerializeField]
-    private Sprite[] visionButtonSprites; 
+    private Sprite[] visionButtonSprites;
+
+    private int myDisplayTimer;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -48,13 +50,30 @@ public class GameUIHandler : MonoBehaviour
 
     private void UpdateTimerDisplay()
     {
-        levelTimer.text = GameManager.instance.timerToDisplay.ToString();
+        // Update normal timer plus enlarge effect
+        if (myDisplayTimer != GameManager.instance.timerToDisplay)
+        {
+            myDisplayTimer = GameManager.instance.timerToDisplay;
+            levelTimer.text = myDisplayTimer.ToString();
+            StartCoroutine(EnlargeTimer());
+        }
 
+        // Update vision ability timer
         if (visionButton.GetComponentInChildren<TMP_Text>().enabled)
         {
             visionButton.GetComponentInChildren<TMP_Text>().text =
                 GameManager.instance.player.GetComponent<VisionAbility>().
                 timerToDisplay.ToString(); ;
         }
+    }
+
+    private IEnumerator EnlargeTimer()
+    {
+        float defaultFontSize = levelTimer.fontSize;
+        levelTimer.fontSize = defaultFontSize * 1.15f;
+
+        yield return new WaitForSeconds(0.25f);
+
+        levelTimer.fontSize = defaultFontSize;
     }
 }
